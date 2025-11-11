@@ -1,0 +1,27 @@
+Analisis Soal No. 1 – Transformasi Negatif & Logaritmik
+
+Perbedaan persebaran nilai keabuan antara ketiga citra
+Pada citra asli, persebaran nilai keabuan merepresentasikan tingkat terang-gelap sesuai kondisi objek. Piksel terang memiliki nilai tinggi (mendekati 255) dan piksel gelap bernilai rendah (mendekati 0).
+Setelah dilakukan transformasi negatif, nilai keabuan menjadi terbalik secara linear: bagian yang awalnya gelap berubah menjadi terang dan sebaliknya. Ini membuat distribusi nilai keabuan “diputar balik” terhadap sumbu tengah (255 − F), sehingga kontrasnya terlihat seperti bayangan foto film negatif.
+Sementara pada transformasi logaritmik, persebaran nilai keabuan menjadi tidak linear. Nilai piksel kecil (gelap) dinaikkan secara signifikan, sedangkan nilai besar (terang) meningkat lebih lambat. Akibatnya, detail di area gelap menjadi lebih terlihat, sementara area terang sedikit dipadatkan. Jadi, logaritmik memberi efek “meratakan” kontras di bagian bawah kurva intensitas.
+
+Kapan transformasi logaritmik lebih bermanfaat dibanding negatif
+Transformasi logaritmik lebih berguna ketika citra memiliki perbedaan pencahayaan ekstrem, misalnya pada gambar dengan banyak area gelap dan sedikit area terang — contohnya foto sinar-X, citra astronomi, atau citra medis. Logaritmik menonjolkan detail pada bagian yang sebelumnya sangat gelap tanpa membuat bagian terang menjadi terlalu jenuh.
+Sebaliknya, transformasi negatif lebih cocok untuk menonjolkan detail di area terang, karena ia membalikkan distribusi nilai keabuan sepenuhnya. Dengan kata lain, logaritmik bermanfaat saat ingin memperjelas informasi di area redup, sedangkan negatif berguna untuk menyoroti bentuk atau pola pada area yang semula terang.
+
+Analisis Soal No. 2 – Efek Konvolusi LPF, HPF, dan BPF
+
+Perbandingan hasil visual dan nilai piksel rata-rata
+Low Pass Filter (LPF) menghasilkan citra yang tampak lebih halus atau sedikit blur. Filter ini menekan perubahan intensitas tajam antar piksel sehingga noise kecil ikut hilang. Rata-rata nilai piksel cenderung mendekati nilai tengah citra asli karena tepi dan detail dikurangi.
+High Pass Filter (HPF) sebaliknya, menonjolkan perubahan intensitas tajam seperti tepi atau batas objek. Hasil visualnya kontras tinggi, banyak bagian gelap dan terang ekstrem. Nilai piksel rata-rata sering menurun atau mendekati nol karena banyak piksel negatif dihasilkan setelah konvolusi.
+Band Pass Filter (BPF) menggabungkan karakter LPF dan HPF. Ia mempertahankan detail penting sambil mengurangi noise, sehingga hasilnya lebih tajam tetapi tetap alami. Rata-rata nilai piksel berada di antara LPF dan HPF — tidak terlalu rendah seperti HPF, namun tidak setengah abu-abu seperti LPF.
+Secara visual, urutan “ketajaman” yang terlihat adalah:
+LPF (paling lembut) < BPF (seimbang) < HPF (paling tajam/tegas).
+
+Hubungan antara domain spasial dan domain frekuensi
+Domain spasial menggambarkan operasi langsung pada piksel (seperti yang kita lakukan dengan kernel konvolusi).
+Domain frekuensi menggambarkan citra sebagai kombinasi komponen frekuensi (tinggi dan rendah) yang mewakili perubahan intensitas.
+Hubungannya:
+LPF di domain spasial berfungsi menghilangkan frekuensi tinggi (detail dan noise), sehingga di domain frekuensi ia menahan bagian pusat (frekuensi rendah) dan memotong tepi spektrum.
+HPF di domain spasial justru menghilangkan frekuensi rendah (area halus), mempertahankan tepi-tepi tajam. Dalam spektrum, ia menahan bagian tepi spektrum dan memblokir pusatnya.
+BPF adalah kombinasi keduanya: ia melewatkan sebagian frekuensi menengah dan menahan frekuensi terlalu rendah maupun terlalu tinggi. Karena itu hasilnya tampak seimbang antara ketajaman dan kehalusan.
